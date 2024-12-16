@@ -16,11 +16,10 @@ const productTestHelper = {
         product.price = Math.floor(Math.random() * 100) + 1;
       }
       const createdProduct = await createProduct(product);
-      this.testProductIds.push(createdProduct.id); // Store the created product's ID
+      this.testProductIds.push(createdProduct.id);
     }
     console.log('Test products loaded successfully');
   },
-
   async cleanupTestData() {
     console.log('Cleaning up test products...');
     for (const productId of this.testProductIds) {
@@ -29,10 +28,8 @@ const productTestHelper = {
 
     console.log('Cleaning up test orders...');
     for (const orderId of this.testOrderIds) {
-      // Assuming an `orders.destroy` method exists. Otherwise, implement if needed.
       await destroy(orderId);
     }
-
     console.log('Test products and orders cleaned up successfully');
   },
 
@@ -41,7 +38,6 @@ const productTestHelper = {
       throw new Error('No test products available. Run setupTestData() first.');
     }
 
-    // Select a random number of products (up to 10)
     const numProducts = Math.floor(Math.random() * 10) + 1;
     const products = [];
 
@@ -50,7 +46,6 @@ const productTestHelper = {
       products.push(this.testProductIds[randomIndex]);
     }
 
-    // Create a new test order
     const orderData = {
       buyerEmail: `test${Date.now()}@example.com`,
       products,
