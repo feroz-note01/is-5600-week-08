@@ -12,19 +12,13 @@ describe('Product Module', () => {
 
   describe('list', () => {
     it('should list products', async () => {
-      // Ensure mockQuery.exec resolves with expected product data
-      mockQuery.exec.mockResolvedValue([
-        { description: 'Product 1' },
-        { description: 'Product 2' },
-      ]);
       mockModel.find.mockReturnValue(mockQuery);
 
       const products = await list();
-      expect(products.length).toBe(2); // Check length of the returned products array
-      expect(products[0].description).toBe('Product 1'); // Check first product's description
-      expect(products[1].description).toBe('Product 2'); // Check second product's description
+      expect(products.length).toBe(2);
+      expect(products[0].description).toBe('Product 1');
+      expect(products[1].description).toBe('Product 2');
 
-      // Verify the chainable query methods were called
       expect(mockQuery.sort).toHaveBeenCalledWith({ _id: 1 });
       expect(mockQuery.skip).toHaveBeenCalled();
       expect(mockQuery.limit).toHaveBeenCalled();
